@@ -1,0 +1,155 @@
+#include <iostream>
+#include <string.h>
+#include <conio.h>
+#include <string>
+using namespace std;
+string isim[100], soyisim[100],h;
+int yas[100], i=0, index,girdi;
+char deger;
+void ana_menu();
+void bilgiler() {
+	cout << "Isim alayim : ";
+	cin >> isim[i+1];
+	cout << "Soyisim alayim : ";
+	cin >> soyisim[i+1];
+	cout << "Yasiniz : ";
+	cin >> yas[i+1];
+	cout << "\nKayit tamamlandi !" << endl;
+	i++;
+	system("pause");
+	ana_menu();
+}
+void sil() {
+	if (i == 0) {
+		cout << "Henuz listede kimse yok !" << endl;
+		system("pause");
+		system("cls");
+		ana_menu();
+	}
+	cout << "Silinecek kisinin indexi : ";
+	cin >> index;
+	for (int b = 0;b <= i;b++) {
+		if (index == b) {
+			isim[index] = "";
+			soyisim[index] = "";
+			yas[index] = NULL;
+			cout << "\nKayit bilgileri silindi !" << endl;
+			system("pause");
+			ana_menu();
+		}
+	}
+	cout << "gecersiz index !" << endl;
+}
+void duzenle() {
+	if (i == 0) {
+		cout << "Henuz listede kimse yok !" << endl;
+		system("pause");
+		system("cls");
+		ana_menu();
+	}
+	cout << "duzenlenecek kisinin indexini girin :";
+	cin >> girdi;
+	for (int k = 0;k <= i;k++) {
+		if (girdi == k) {
+			cout << "Hangi bilgiyi duzenlemek istiyorsun (isim/soyisim/yas) :";
+			cin >> h;
+			if (h == "isim") {
+				cout << "isim => ";
+				cin >> isim[girdi];
+			}
+			if (h == "soyisim") {
+				cout << "soyisim => ";
+				cin >> soyisim[girdi];
+			}
+			if (h == "yas") {
+				cout << "yas => ";
+				cin >> yas[girdi];
+			}
+			if ((h != "isim") && (h != "yas") && (h != "soyisim")) cout << "hatali giris denediniz !" << endl;
+			system("pause");
+			ana_menu();
+		}
+	}
+	cout << "gecersiz index !" << endl;
+}
+int main() {
+	string giris, sifre;
+	int hak = 3;
+	cout << "Giris yapiniz 3 hakkiniz var ."<<endl;
+	system("pause");
+	for (int q = 0; q < 3;q++) {
+		system("cls");
+		cout << "Kullanici adi :";
+		cin >> giris;
+		if (giris == "root") {
+			cout << "sifre girin :";
+			cin >> sifre;
+			if (sifre == "root") {
+				cout << "yonlendiriliyorsunuz .." << endl;
+				system("pause");
+				ana_menu();
+			}
+			else cout << "sifre hatali !" << endl;
+			hak--;
+			cout << "\n" << hak << " hakkiniz kaldi !" << endl;
+			system("pause");
+			continue;
+		}
+		else cout << "kullanici adi hatali !" << endl;
+		hak--;
+		cout << "\n" << hak << " hakkiniz kaldi !" << endl;
+		system("pause");
+		continue;
+	}
+}
+void ana_menu() {
+	system("cls");
+	cout << "---- LISTE KAYIT ----" << endl;
+	cout << "1.Yeni kayit\n2.Kayit sil\n3.Kayit duzenle\n4.Kayit Listele\n5.Cikis" << endl;
+	deger = _getch();
+	switch (deger)
+	{
+	case '1':
+		system("cls");
+		bilgiler();
+		system("pause");
+		ana_menu();
+		break;
+	case '2':
+		system("cls");
+		sil();
+		system("pause");
+		ana_menu();
+		break;
+	case '3':
+		system("cls");
+		duzenle();
+		system("pause");
+		ana_menu();
+		break;
+	case '4':
+		system("cls");
+		if (i == 0) {
+			cout << "Henuz listede kimse yok !" << endl;
+		}
+		else {
+			for (int a = 1;a <= i;a++) {
+				if (isim[a] != "") {
+					cout << a << ".\nIsim :" << isim[a] << "\nSoyisim : " << soyisim[a] << "\nYas : " << yas[a] << endl;
+					cout << "***************" << endl;
+				}
+			}
+		}
+		system("pause");
+		ana_menu();
+		break;
+	case '5':
+		exit(1);
+	default:
+		system("cls");
+		cout << "Hatali secim yaptiniz !" << endl;
+		system("pause");
+		ana_menu();
+		break;
+	}
+}
